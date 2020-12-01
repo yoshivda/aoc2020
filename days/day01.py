@@ -1,9 +1,9 @@
 from itertools import combinations
+from lib import load_input
 
 
-def solve(filename):
-    with open(filename) as f:
-       nums = [int(line) for line in f]
+def solve(input):
+    nums = [int(line) for line in input.strip().split("\n")]
     # return part_one(nums)
     return part_two(nums)
 
@@ -21,4 +21,4 @@ def part_two(nums):
 
 
 if __name__ == "__main__":
-    print(solve("input.txt"))
+    print(solve(load_input(1)))
