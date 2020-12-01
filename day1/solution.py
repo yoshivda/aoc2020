@@ -1,3 +1,4 @@
+from itertools import combinations
 
 
 def solve(filename):
@@ -8,22 +9,15 @@ def solve(filename):
 
 
 def part_one(nums):
-    for i in range(len(nums)):
-        for j in range(len(nums)):
-            if i == j:
-                continue
-            if nums[i] + nums[j] == 2020:
-                return nums[i] * nums[j]
+    for i, j in combinations(nums, 2):
+        if i + j == 2020:
+            return i * j
 
 
 def part_two(nums):
-    for i in range(len(nums)):
-        for j in range(len(nums)):
-            for k in range(len(nums)):
-                if i == j or i == k or j == k:
-                    continue
-                if nums[i] + nums[j] + nums[k] == 2020:
-                    return nums[i] * nums[j] * nums[k]
+    for i, j, k in combinations(nums, 3):
+        if i + j + k == 2020:
+            return i * j * k
 
 
 if __name__ == "__main__":
