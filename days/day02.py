@@ -1,31 +1,21 @@
-from itertools import combinations
 from lib import load_input
 
 
 def solve(input):
-    passes = [line.split() for line in input.strip().split("\n")]
-    # return part_one(passes)
-    return part_two(passes)
+    data = [line.split() for line in input.strip().split("\n")]
+    passwords = [(*(map(int, line[0].split("-"))), line[1][0], line[2]) for line in data]
+    return part_one(passwords)
+    # return part_two(passwords)
 
 
-def part_one(passes):
-    cnt = 0
-    for limits, letter, phrase in passes:
-        lower, upper = limits.split("-")
-        if int(lower) <= list(phrase).count(letter[0]) <= int(upper):
-            cnt += 1
-    return cnt
+def part_one(passwords):
+    return sum(1 for (lower, upper, char, pwd) in passwords if lower <= list(pwd).count(char) <= upper)
 
 
-def part_two(passes):
-    cnt = 0
-    for limits, letter, phrase in passes:
-        letter = letter[0]
-        lower, upper = limits.split("-")
-        if (phrase[int(lower) - 1] == letter) != (phrase[int(upper) - 1] == letter):
-            cnt += 1
-    return cnt
+def part_two(passwords):
+    return sum(1 for (lower, upper, char, pwd) in passwords if (pwd[lower - 1] == char) != (pwd[upper - 1] == char))
 
 
 if __name__ == "__main__":
+    print(solve(load_input(2, "small")))
     print(solve(load_input(2)))
