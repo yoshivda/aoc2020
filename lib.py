@@ -5,10 +5,13 @@ YEAR = 2020
 ROOT_PATH = Path(__file__).parents[0]
 
 
-def load_input(day):
-    path = Path(ROOT_PATH, get_filename(day))
+def load_input(day, part=""):
+    path = Path(ROOT_PATH, get_filename(day, part))
     if not path.exists():
-        download_input(day)
+        if not part:
+            download_input(day)
+        else:
+            raise FileNotFoundError(f"File {path} does not exist")
     return path.read_text()
 
 
@@ -19,7 +22,9 @@ def download_input(day):
     Path(ROOT_PATH, get_filename(day)).write_bytes(req.content)
 
 
-def get_filename(day):
+def get_filename(day, part):
+    if part:
+        return f"inputs/day{str(day).zfill(2)}_{part}.txt"
     return f"inputs/day{str(day).zfill(2)}.txt"
 
 
