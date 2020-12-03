@@ -2,8 +2,8 @@ from itertools import combinations
 from lib import load_input
 
 
-def solve(input):
-    nums = [int(line) for line in input.strip().split("\n")]
+def solve(data):
+    nums = [int(line) for line in data.strip().split("\n")]
     # return part_one(nums)
     return part_two(nums)
 

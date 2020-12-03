@@ -3,9 +3,9 @@ from math import prod
 from lib import load_input
 
 
-def solve(input):
+def solve(data):
     # return part_one(input.splitlines())
-    return part_two(input.splitlines())
+    return part_two(data.splitlines())
 
 
 def part_one(data):
@@ -27,7 +27,7 @@ def calc_slope(data, row_offset, col_offset):
 
 
 def part_two(data):
-    return prod([calc_slope(data, row, col) for col, row in [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]])
+    return prod(calc_slope(data, row, col) for col, row in [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)])
 
 
 if __name__ == "__main__":

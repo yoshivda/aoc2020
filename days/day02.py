@@ -1,9 +1,9 @@
 from lib import load_input
 
 
-def solve(input):
-    data = [line.split() for line in input.strip().split("\n")]
-    passwords = [(*(map(int, line[0].split("-"))), line[1][0], line[2]) for line in data]
+def solve(data):
+    lines = [line.split() for line in data.strip().split("\n")]
+    passwords = [(*(map(int, line[0].split("-"))), line[1][0], line[2]) for line in lines]
     return part_one(passwords)
     # return part_two(passwords)
 
