@@ -22,7 +22,7 @@ def download_input(day):
     Path(ROOT_PATH, get_filename(day)).write_bytes(req.content)
 
 
-def get_filename(day, part):
+def get_filename(day, part=None):
     if part:
         return f"inputs/day{str(day).zfill(2)}_{part}.txt"
     return f"inputs/day{str(day).zfill(2)}.txt"
