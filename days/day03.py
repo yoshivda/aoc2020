@@ -4,30 +4,20 @@ from lib import load_input
 
 
 def solve(data):
-    # return part_one(input.splitlines())
+    # return part_one(data.splitlines())
     return part_two(data.splitlines())
 
 
 def part_one(data):
-    return calc_slope(data, 1, 3)
+    return calc_slope(data, 3, 1)
 
 
-def calc_slope(data, row_offset, col_offset):
-    cnt = 0
-    row = 0
-    col = 0
-    while row < len(data):
-        if col >= len(data[0]):
-            col -= len(data[0])
-        if data[row][col] == "#":
-            cnt += 1
-        row += row_offset
-        col += col_offset
-    return cnt
+def calc_slope(data, dx, dy):
+    return sum(1 for iters in range(len(data) // dy) if data[dy * iters][(dx * iters) % len(data[0])] == "#")
 
 
 def part_two(data):
-    return prod(calc_slope(data, row, col) for col, row in [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)])
+    return prod(calc_slope(data, dx, dy) for dx, dy in [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)])
 
 
 if __name__ == "__main__":
