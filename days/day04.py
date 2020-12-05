@@ -1,5 +1,4 @@
 import re
-from math import prod
 
 from lib import load_input
 
@@ -9,6 +8,7 @@ def solve(data):
     return part_two(data.split("\n\n"))
 
 
+# Rank 35 on the global leaderboard :D
 def part_one(data):
     return sum(1 for passport in data if all(field in passport for field in ("ecl:", "pid:", "eyr:", "hcl:", "byr:",
                                                                              "iyr:", "hgt:")))
