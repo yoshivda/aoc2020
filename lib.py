@@ -1,4 +1,3 @@
-import sys
 from pathlib import Path
 import requests
 
@@ -29,12 +28,15 @@ def get_filename(day, part=None):
     return f"inputs/day{str(day).zfill(2)}.txt"
 
 
-def create_day(day):
+def create_new_day():
+    day = 1
+    while Path(ROOT_PATH, "days", f"day{str(day).zfill(2)}.py").exists():
+        day += 1
+
     Path(ROOT_PATH, get_filename(day, "small")).write_text("")
     template = Path(ROOT_PATH, "template.py").read_text().replace("X", str(day))
     Path(ROOT_PATH, "days", f"day{str(day).zfill(2)}.py").write_text(template)
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        create_day(int(sys.argv[1]))
+    create_new_day()
