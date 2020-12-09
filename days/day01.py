@@ -3,21 +3,17 @@ from lib import load_input
 
 
 def solve(data):
-    nums = [int(line) for line in data.strip().split("\n")]
+    nums = [int(line) for line in data.splitlines()]
     # return part_one(nums)
     return part_two(nums)
 
 
 def part_one(nums):
-    for i, j in combinations(nums, 2):
-        if i + j == 2020:
-            return i * j
+    return next(i * j for i, j in combinations(nums, 2) if i + j == 2020)
 
 
 def part_two(nums):
-    for i, j, k in combinations(nums, 3):
-        if i + j + k == 2020:
-            return i * j * k
+    return next(i * j * k for i, j, k in combinations(nums, 3) if i + j + k == 2020)
 
 
 if __name__ == "__main__":
