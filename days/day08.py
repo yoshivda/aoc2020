@@ -35,11 +35,11 @@ def part_two(data):
     for i in range(len(data)):
         if "nop" in data[i]:
             new_data = data[:i] + [data[i].replace("nop", "jmp")] + data[i + 1:]
-            if (res := eval_data(new_data), 2):
+            if res := eval_data(new_data, 2):
                 return res
         elif "jmp" in data[i]:
             new_data = data[:i] + [data[i].replace("jmp", "nop")] + data[i+1:]
-            if (res := eval_data(new_data), 2):
+            if res := eval_data(new_data, 2):
                 return res
     return False
 

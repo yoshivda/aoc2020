@@ -10,7 +10,7 @@ def part_one(data):
     data.append(0)
     data.sort()
     return sum(1 for i in range(len(data) - 1) if data[i + 1] - data[i] == 1) * \
-           (sum(1 for i in range(len(data) - 1) if data[i + 1] - data[i] == 3) + 1)
+        (sum(1 for i in range(len(data) - 1) if data[i + 1] - data[i] == 3) + 1)
 
 
 def part_two(data):
