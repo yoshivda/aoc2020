@@ -20,10 +20,10 @@ def part_two(data):
 
     mem = [0] * len(data)
     mem[0] = 1
-    for i in range(len(data)):
-        for j in range(i):
-            if data[i] - data[j] <= 3:
-                mem[i] += mem[j]
+    for i in range(1, len(data)):
+        for j in range(1, 4):
+            if 0 <= i - j < len(data) and data[i] - data[i - j] <= 3:
+                mem[i] += mem[i - j]
     return mem[-1]
 
 
