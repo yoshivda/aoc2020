@@ -18,22 +18,14 @@ def part_one(data):
 
 
 def part_two(data):
-    lines = [int(part) if part != "x" else part for part in data[1].split(",")]
+    lines = ((index, int(part)) for (index, part) in enumerate(data[1].split(",")) if part != "x")
     time = 0
-    line_index = 0
     step_size = 1
-    while True:
-        line = lines[line_index]
-        if line == "x":
-            line_index += 1
-            continue
-        if (time + line_index) % line == 0:
-            line_index += 1
-            if line_index == len(lines):
-                return time
-            step_size *= line
-        else:
+    for index, line in lines:
+        while (time + index) % line != 0:
             time += step_size
+        step_size *= line
+    return time
 
 
 if __name__ == "__main__":
