@@ -1,5 +1,3 @@
-import math
-
 from lib import load_input
 
 
@@ -22,29 +20,20 @@ def part_one(data):
 def part_two(data):
     lines = [int(part) if part != "x" else part for part in data[1].split(",")]
     time = 0
-    offset = 0
-    found = -1
-    cur_lcm = 1
+    line_index = 0
+    step_size = 1
     while True:
-        for line in lines:
-            if line == "x":
-                offset += 1
-                continue
-            if (time + offset) % line == 0:
-                offset += 1
-                if offset == len(lines):
-                    return time
-                elif offset > found:
-                    found = offset
-                    cur_lcm = lcm(cur_lcm, line)
-            else:
-                offset = 0
-                time += cur_lcm
-                break
-
-
-def lcm(a, b):
-    return abs(a*b) // math.gcd(a, b)
+        line = lines[line_index]
+        if line == "x":
+            line_index += 1
+            continue
+        if (time + line_index) % line == 0:
+            line_index += 1
+            if line_index == len(lines):
+                return time
+            step_size *= line
+        else:
+            time += step_size
 
 
 if __name__ == "__main__":
