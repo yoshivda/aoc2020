@@ -21,20 +21,12 @@ class Int:
         return Int(self.val + other.val)
 
 
-def evaluate_one(line):
-    return eval(re.sub(r"(\d+)", r"Int(\1)", line).replace("*", "-"))
-
-
 def part_one(data):
-    return sum(evaluate_one(line).val for line in data)
-
-
-def evaluate_two(line):
-    return eval(re.sub(r"(\d+)", r"Int(\1)", line).replace("*", "-").replace("+", "/"))
+    return sum(eval(re.sub(r"(\d+)", r"Int(\1)", line).replace("*", "-")).val for line in data)
 
 
 def part_two(data):
-    return sum(evaluate_two(line).val for line in data)
+    return sum(eval(re.sub(r"(\d+)", r"Int(\1)", line).replace("*", "-").replace("+", "/")).val for line in data)
 
 
 if __name__ == "__main__":
