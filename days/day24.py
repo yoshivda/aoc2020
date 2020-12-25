@@ -1,6 +1,9 @@
 from collections import defaultdict
+from re import findall
 
 from lib import load_input
+
+directions = {"ne": (.5, -1), "e": (1, 0), "se": (.5, 1), "sw": (-.5, 1), "w": (-1, 0), "nw": (-.5, -1)}
 
 
 def solve(data):
@@ -15,14 +18,8 @@ def part_one(data):
 def flip_tiles(data):
     tiles = set()
     for line in data:
-        i = c1 = c2 = 0
-        while i < len(line):
-            if line[i] in "ns":
-                dir = line[i:i + 2]
-                i += 2
-            else:
-                dir = line[i]
-                i += 1
+        c1 = c2 = 0
+        for dir in findall(r"[ns]?[we]", line):
             c1, c2 = get_pos(c1, c2, dir)
         if (c1, c2) in tiles:
             tiles.remove((c1, c2))
@@ -32,34 +29,8 @@ def flip_tiles(data):
 
 
 def get_pos(c1, c2, dir):
-    if dir == "w":
-        return c1 - 1, c2
-    elif dir == "e":
-        return c1 + 1, c2
-
-    elif dir == "sw":
-        if c2 % 2:
-            return c1 - 1, c2 + 1
-        else:
-            return c1, c2 + 1
-
-    elif dir == "se":
-        if c2 % 2:
-            return c1, c2 + 1
-        else:
-            return c1 + 1, c2 + 1
-
-    elif dir == "ne":
-        if c2 % 2:
-            return c1, c2 - 1
-        else:
-            return c1 + 1, c2 - 1
-
-    elif dir == "nw":
-        if c2 % 2:
-            return c1 - 1, c2 - 1
-        else:
-            return c1, c2 - 1
+    dx, dy = directions[dir]
+    return c1 + dx, c2 + dy
 
 
 def part_two(data):
@@ -68,7 +39,7 @@ def part_two(data):
     for day in range(100):
         pings = defaultdict(int)
         for (c1, c2) in tiles:
-            for dc1, dc2 in [get_pos(c1, c2, dir) for dir in ["w", "e", "ne", "nw", "se", "sw"]]:
+            for dc1, dc2 in [get_pos(c1, c2, dir) for dir in directions]:
                 pings[(dc1, dc2)] += 1
         for tile, ping in pings.items():
             if tile in tiles and ping > 2:
